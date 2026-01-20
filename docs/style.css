@@ -1,0 +1,25 @@
+body {
+  font-family: system-ui, Arial, sans-serif;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  background-color: #f5f5f5;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  color: #333;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

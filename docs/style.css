@@ -145,6 +145,20 @@ body.post p {
   color: #d1d5db;
 }
 
+/* Tarjetas dentro de las semanas */
+.content-card {
+  background-color: #020617;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #1f2933;
+}
+
+.content-card h2:first-child,
+.content-card h3:first-child {
+  margin-top: 0;
+}
+
 /* Código */
 pre {
   background-color: #020617;

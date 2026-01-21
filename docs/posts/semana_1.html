@@ -16,8 +16,11 @@
     </p>
   </header>
 
-  <main>
-    <article>
+<main>
+  <article>
+
+    <!-- CAJA 1 -->
+    <section class="content-card">
 
       <h2>Objetivos</h2>
       <p>
@@ -108,7 +111,10 @@
                 </span>
             </a>
             </main>
+
         </div>
+        </body>
+        </html>
       </code></pre>
 
       <h3>style.css</h3>
@@ -260,6 +266,20 @@
         color: #d1d5db;
         }
 
+        /* Tarjetas dentro de las semanas */
+        .content-card {
+        background-color: #020617;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        border: 1px solid #1f2933;
+        }
+
+        .content-card h2:first-child,
+        .content-card h3:first-child {
+        margin-top: 0;
+        }
+
         /* Código */
         pre {
         background-color: #020617;
@@ -282,6 +302,7 @@
         margin-top: 30px;
         color: #93c5fd;
         }
+
       </code></pre>
 
       <h2>Resultado</h2>
@@ -291,10 +312,19 @@
       <p>Resultado de la configuración de la Semana 1:</p>
       <img src="../images/Semana_1/resultado_semana1.png" alt="Resultado semana 1">
 
-      <a class="back" href="../index.html">← Volver al índice</a>
+    </section>
 
-    </article>
-  </main>
+    <!-- CAJA 2 (VACÍA POR AHORA) -->
+    <section class="content-card">
+      <h2>Follow line</h2>
+      <p>Realización del ejercicio follow line de RoboticsAcademy</p>
+    </section>
+
+    <a class="back" href="../index.html">← Volver al índice</a>
+
+  </article>
+</main>
+
 
   <!-- Fecha automática -->
   <script>

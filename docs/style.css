@@ -160,6 +160,19 @@ body.post p {
 }
 
 /* Codigo */
+textarea {
+  width: 100%;
+  min-height: 400px;
+  background-color: #020617;
+  color: #a5f3fc;
+  border: 1px solid #1f2933;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
 pre {
   background-color: #020617;
   border: 1px solid #1f2933;

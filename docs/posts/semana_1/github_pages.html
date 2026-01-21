@@ -10,9 +10,9 @@
 
   <!-- Logo fijo arriba a la derecha -->
   <div class="logo">
-    <img src="../../images/logo.png" alt="Logo">
+    <img src="../../images/logo.png" alt="Logo" class="post-logo">
   </div>
-x
+
   <header>
     <h1>Inicialización con GitHub Pages</h1>
     <p>
@@ -51,7 +51,10 @@ x
         <p>
           Se clonó el repositorio y se creó la carpeta <code>docs</code> con las
           subcarpetas <code>posts</code> e <code>images</code>, junto a los archivos
-          <code>index.html</code> y <code>style.css</code>.
+          <code>index.html</code> y <code>style.css</code>. 
+          Dentro de la carpeta posts, cree una subcarpeta <code>semana_1</code>, que incluye
+          los archivos <code>semana_1.html</code>, <code>github_pages.html</code> y <code>follow_line.html</code>.
+          Estos archivos defienen la estructura de cada una de las tareas realizadas la semana 1.
         </p>
 
         <p>
@@ -131,7 +134,7 @@ x
 
 
         <h3>Código style.css</h3>
-        <pre><code>
+        <textarea>
             /* Reset */
             * {
             box-sizing: border-box;
@@ -166,6 +169,14 @@ x
 
             .logo img {
             height: 40px;
+            }
+
+            /* Logo dentro de los posts */
+            .post-logo {
+            max-width: 220px;
+            height: auto;
+            margin: 30px auto;
+            display: block;
             }
 
             /* Layout principal */
@@ -337,7 +348,73 @@ x
             margin-top: 30px;
             color: #93c5fd;
             }
-        </code></pre>
+        </textarea>
+
+        <h3>Código semana_1.html</h3>
+        <textarea>
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+            <meta charset="UTF-8">
+            <title>Semana 1 · Inicio de las prácticas</title>
+            <link rel="stylesheet" href="../../style.css">
+            </head>
+
+            <body class="home">
+
+            <!-- Logo fijo arriba a la derecha -->
+            <div class="logo">
+                <img src="../../images/logo.png" alt="Logo">
+            </div>
+
+            <div class="layout">
+
+                <!-- Barra lateral -->
+                <aside class="sidebar">
+                <img class="profile-pic" src="../../images/profile.jpeg" alt="Foto de perfil">
+
+                <h2>Jesús Pérez</h2>
+                <p class="role">Estudiante en prácticas</p>
+
+                <p class="description">
+                    Blog de seguimiento semanal de mis prácticas en JdeRobot.
+                </p>
+                </aside>
+
+                <!-- Contenido -->
+                <main class="content">
+                <h1>Semana 1 · Inicio de las prácticas</h1>
+
+                <a class="post-card" href="github_pages.html">
+                    <h3>Inicialización con GitHub Pages</h3>
+                    <p class="post-excerpt">
+                    Pruebas con GitHub Pages y configuración del blog.
+                    </p>
+                    <span class="post-date">
+                    <span class="auto-date"></span>
+                    </span>
+                </a>
+
+                <a class="post-card" href="follow_line.html">
+                    <h3>Realización del ejercicio Follow Line</h3>
+                    <p class="post-excerpt">
+                    Realización del ejercicio follow_line y toma de contacto con
+                    la plataforma Robotics Academy.
+                    </p>
+                    <span class="post-date">
+                    <span class="auto-date"></span>
+                    </span>
+                </a>
+
+                <a class="back" href="../index.html">← Volver al índice principal</a>
+                </main>
+
+            </div>
+
+            </body>
+            </html>
+
+        </textarea>
 
         <h2>Resultado</h2>
 

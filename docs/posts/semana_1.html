@@ -2,241 +2,313 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Semana 1</title>
+  <title>Semana 1 · Inicio de las prácticas</title>
   <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+
+<body class="post">
 
   <header>
-    <h1>Semana 1</h1>
-    <p>Inicio de las prácticas</p>
+    <h1>Semana 1 · Inicio de las prácticas</h1>
+    <p>
+      Inicio de las prácticas ·
+      <span class="auto-date"></span>
+    </p>
   </header>
 
   <main>
     <article>
 
       <h2>Objetivos</h2>
-      <p>Inicializarme con el uso del GitHub pages y la plataforma RoboticsAcademy</p>
-        <p>
+      <p>
+        Inicializarme con el uso de GitHub Pages y la plataforma Robotics Academy.
+      </p>
+
+      <p>
         Durante el inicio de las prácticas, el primer paso que realicé fue seguir la
         guía oficial de usuario de <strong>Robotics Academy</strong>, disponible en el
         siguiente enlace:
         <a href="https://jderobot.github.io/RoboticsAcademy/user_guide/" target="_blank">
-        https://jderobot.github.io/RoboticsAcademy/user_guide/
+          https://jderobot.github.io/RoboticsAcademy/user_guide/
         </a>.
-        </p>
+      </p>
 
-        <p>
+      <p>
         Una vez revisada la documentación, he estado aprendiendo y experimentando con
-        <strong>GitHub Pages</strong>, entendiendo cómo funciona y mejorando el aspecto del primer intento
-        </p>
+        <strong>GitHub Pages</strong>, entendiendo cómo funciona y mejorando el aspecto
+        del primer intento.
+      </p>
 
-        <h2>Pasos realizados:</h2>
+      <h2>Pasos realizados</h2>
 
-        <p>
-            El primer paso es clonar el repositrio donde se creará el GitHub pages. 
-            Una vez clonado creo dentro de la carpeta docs, otras dos subcarpetas (posts e images) 
-            y dos archivos (index.html y style.css).
-            En la capeta "posts", servirá para añadir cada una de las semanas a la página, por otro lado,
-            en la carpeta "images", se guardara las imagenes para añadir a la página.
-            El archivo "index.html" define el contenido y la estructura de la página principal del bloque, mientras
-            que el archivo "style.css", define el diseño visual de la página.
-        </p>
+      <p>
+        El primer paso fue clonar el repositorio donde se crearía el GitHub Pages.
+        Una vez clonado, creé dentro de la carpeta <code>docs</code> dos subcarpetas
+        (<code>posts</code> e <code>images</code>) y dos archivos
+        (<code>index.html</code> y <code>style.css</code>).
+      </p>
 
-        <p>
-            Despues de varias pruebas los archivos "index.html" y "style.css" quedan de esta forma:
+      <p>
+        La carpeta <code>posts</code> sirve para añadir cada una de las semanas al blog,
+        mientras que la carpeta <code>images</code> almacena las imágenes utilizadas.
+        El archivo <code>index.html</code> define la estructura y el contenido principal,
+        y <code>style.css</code> define el diseño visual.
+      </p>
 
-            <h3>index.html</h3>
-            <pre><code>
-                <!DOCTYPE html>
-                <html lang="es">
-                <head>
-                <meta charset="UTF-8">
-                <title>Blog de Prácticas</title>
-                <link rel="stylesheet" href="style.css">
-                </head>
-                <body>
+      <p>
+        Después de varias pruebas, los archivos <strong>index.html</strong> y
+        <strong>style.css</strong> quedaron de la siguiente forma:
+      </p>
 
-                <!-- Logo fijo arriba a la derecha -->
-                <div class="logo">
-                    <img src="images/logo.png" alt="Logo">
-                </div>
+      <h3>index.html</h3>
+      <pre><code>
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+        <meta charset="UTF-8">
+        <title>Blog de Prácticas</title>
+        <link rel="stylesheet" href="style.css">
+        </head>
 
-                <div class="layout">
+        <body class="home">
 
-                    <!-- Sidebar izquierda -->
-                    <aside class="sidebar">
-                    <img class="profile-pic" src="images/profile.jpg" alt="Foto de perfil">
+        <!-- Logo fijo arriba a la derecha -->
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
 
-                    <h2>Jesús Pérez</h2>
-                    <p class="role">Estudiante en prácticas</p>
+        <div class="layout">
 
-                    <p class="description">
-                        Blog de seguimiento semanal de mis prácticas en JdeRobot.
-                    </p>
-                    </aside>
+            <!-- Barra lateral -->
+            <aside class="sidebar">
+            <img class="profile-pic" src="images/profile.jpeg" alt="Foto de perfil">
 
-                    <!-- Contenido principal -->
-                    <main class="content">
-                    <h1>Entradas</h1>
+            <h2>Jesús Pérez</h2>
+            <p class="role">Estudiante en prácticas</p>
 
-                    <!-- Tarjeta de post -->
-                    <a class="post-card" href="posts/semana_1.html">
-                        <h3>Semana 1 · Inicio de las prácticas</h3>
-                        <p class="post-excerpt">
-                        Configuración del entorno de trabajo, revisión de la guía de
-                        Robotics Academy y primeras pruebas con GitHub Pages.
-                        </p>
-                        <span class="post-date">
-                            <span class="auto-date"></span>
-                        </span>
-                    </a>
+            <p class="description">
+                Blog de seguimiento semanal de mis prácticas en JdeRobot.
+            </p>
+            </aside>
 
-                    <!-- En el futuro solo copias esta tarjeta y cambias el contenido -->
-                    </main>
-                </div>
+            <!-- Contenido -->
+            <main class="content">
+            <h1>Entradas</h1>
 
-                <!-- Script para fecha automática -->
-                <script>
-                    const dateElements = document.querySelectorAll('.auto-date');
-                    const today = new Date();
+            <a class="post-card" href="posts/semana_1.html">
+                <h3>Semana 1 · Inicio de las prácticas</h3>
 
-                    const formattedDate = today.toLocaleDateString('es-ES', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric'
-                    });
+                <p class="post-excerpt">
+                Configuración del entorno de trabajo, revisión de la guía oficial
+                de Robotics Academy y primeras pruebas con GitHub Pages.
+                </p>
 
-                    dateElements.forEach(el => {
-                    el.textContent = formattedDate;
-                    });
-                </script>
+                <span class="post-date">
+                <span class="auto-date"></span>
+                </span>
+            </a>
+            </main>
+        </div>
+      </code></pre>
 
-                </body>
-                </html>
+      <h3>style.css</h3>
+      <pre><code>
+        /* Reset */
+        * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        }
 
-            </code></pre>
+        /* Base */
+        body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    Roboto, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(180deg, #020617, #0f172a);
+        color: #e5e7eb;
+        line-height: 1.7;
+        }
 
-            <h3>style.css</h3>
-            <pre><code>
-                /* Reset */
-                * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-                }
+        a {
+        color: #67e8f9;
+        text-decoration: none;
+        }
 
-                /* General */
-                body {
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                            Roboto, Ubuntu, Cantarell, sans-serif;
-                background: linear-gradient(180deg, #020617, #0f172a);
-                color: #e5e7eb;
-                }
+        a:hover {
+        text-decoration: underline;
+        }
 
-                /* Logo */
-                .logo {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                }
+        /* Logo */
+        .logo {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        }
 
-                .logo img {
-                height: 40px;
-                }
+        .logo img {
+        height: 40px;
+        }
 
-                /* Layout */
-                .layout {
-                display: grid;
-                grid-template-columns: 260px 1fr;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 60px 20px;
-                gap: 40px;
-                }
+        /* Layout principal*/
+        body.home .layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+        gap: 40px;
+        }
 
-                /* Barra lateral */
-                .sidebar {
-                background-color: #020617;
-                padding: 30px 20px;
-                border-radius: 12px;
-                text-align: center;
-                }
+        /* Barra lateral */
+        .sidebar {
+        background-color: #020617;
+        padding: 30px 20px;
+        border-radius: 12px;
+        text-align: center;
+        }
 
-                .profile-pic {
-                width: 120px;
-                height: 120px;
-                border-radius: 50%;
-                object-fit: cover;
-                margin-bottom: 15px;
-                }
+        .profile-pic {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        }
 
-                .sidebar h2 {
-                margin-bottom: 5px;
-                }
+        .sidebar h2 {
+        margin-bottom: 5px;
+        }
 
-                .role {
-                color: #9ca3af;
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-                }
+        .role {
+        color: #9ca3af;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        }
 
-                .description {
-                font-size: 0.9rem;
-                color: #d1d5db;
-                }
+        .description {
+        font-size: 0.9rem;
+        color: #d1d5db;
+        }
 
-                /* Contenido */
-                .content h1 {
-                margin-bottom: 25px;
-                }
+        /* Entradas */
+        .content h1 {
+        margin-bottom: 25px;
+        }
 
-                /* Cartas semanales */
-                .post-card {
-                display: block;
-                background-color: #020617;
-                border-radius: 12px;
-                padding: 20px;
-                text-decoration: none;
-                color: inherit;
-                transition: transform 0.2s, background-color 0.2s;
-                margin-bottom: 20px;
-                }
+        .post-card {
+        display: block;
+        background-color: #020617;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        transition: transform 0.2s, background-color 0.2s;
+        }
 
-                .post-card:hover {
-                background-color: #020617cc;
-                transform: translateY(-4px);
-                }
+        .post-card:hover {
+        transform: translateY(-4px);
+        background-color: #020617cc;
+        }
 
-                .post-card h3 {
-                margin-bottom: 10px;
-                color: #67e8f9;
-                }
+        .post-card h3 {
+        margin-bottom: 10px;
+        }
 
-                .post-excerpt {
-                font-size: 0.95rem;
-                color: #d1d5db;
-                margin-bottom: 10px;
-                }
+        .post-excerpt {
+        color: #d1d5db;
+        margin-bottom: 10px;
+        }
 
-                .post-date {
-                font-size: 0.8rem;
-                color: #9ca3af;
-                }
+        .post-date {
+        font-size: 0.8rem;
+        color: #9ca3af;
+        }
 
-            </code></pre>
-        </p>
+        /* Pagina de post*/
+        body.post header,
+        body.post main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 20px;
+        }
+
+        body.post header {
+        padding-bottom: 20px;
+        }
+
+        body.post header h1 {
+        font-size: 2.6rem;
+        margin-bottom: 10px;
+        }
+
+        body.post header p {
+        color: #9ca3af;
+        }
+
+        body.post article {
+        background-color: #020617;
+        padding: 40px;
+        border-radius: 12px;
+        }
+
+        body.post h2 {
+        margin-top: 40px;
+        margin-bottom: 15px;
+        }
+
+        body.post p {
+        margin-bottom: 16px;
+        color: #d1d5db;
+        }
+
+        /* Código */
+        pre {
+        background-color: #020617;
+        border: 1px solid #1f2933;
+        padding: 16px;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin-bottom: 20px;
+        }
+
+        code {
+        color: #a5f3fc;
+        font-family: "Fira Code", monospace;
+        font-size: 0.9rem;
+        }
+
+        /* Volver */
+        .back {
+        display: inline-block;
+        margin-top: 30px;
+        color: #93c5fd;
+        }
+      </code></pre>
+
       <h2>Resultado</h2>
       <p>Resultado de la configuración inicial:</p>
-      <img src="../images/Semana_1/resultado_inicial.png" alt="Resultado final">
+      <img src="../images/Semana_1/resultado_inicial.png" alt="Resultado inicial">
 
-      <p>Resultado de la configuración semana_1:</p>
-      <img src="../images/Semana_1/resultado_semana1.png" alt="Resultado final">
+      <p>Resultado de la configuración de la Semana 1:</p>
+      <img src="../images/Semana_1/resultado_semana1.png" alt="Resultado semana 1">
 
       <a class="back" href="../index.html">← Volver al índice</a>
 
     </article>
   </main>
+
+  <!-- Fecha automática -->
+  <script>
+    const dateElement = document.querySelector('.auto-date');
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    dateElement.textContent = formattedDate;
+  </script>
 
 </body>
 </html>

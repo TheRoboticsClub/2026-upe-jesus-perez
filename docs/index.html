@@ -5,7 +5,8 @@
   <title>Blog de Prácticas</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body class="home">
 
   <!-- Logo fijo arriba a la derecha -->
   <div class="logo">
@@ -14,7 +15,7 @@
 
   <div class="layout">
 
-    <!-- Sidebar izquierda -->
+    <!-- Barra lateral -->
     <aside class="sidebar">
       <img class="profile-pic" src="images/profile.jpeg" alt="Foto de perfil">
 
@@ -26,40 +27,38 @@
       </p>
     </aside>
 
-    <!-- Contenido principal -->
+    <!-- Contenido -->
     <main class="content">
       <h1>Entradas</h1>
 
-      <!-- Tarjeta de post -->
       <a class="post-card" href="posts/semana_1.html">
         <h3>Semana 1 · Inicio de las prácticas</h3>
+
         <p class="post-excerpt">
-          Configuración del entorno de trabajo, revisión de la guía de
-          Robotics Academy y primeras pruebas con GitHub Pages.
+          Configuración del entorno de trabajo, revisión de la guía oficial
+          de Robotics Academy y primeras pruebas con GitHub Pages.
         </p>
+
         <span class="post-date">
-            <span class="auto-date"></span>
+           <span class="auto-date"></span>
         </span>
       </a>
-
-      <!-- En el futuro solo copias esta tarjeta y cambias el contenido -->
     </main>
+
   </div>
 
-  <!-- Script para fecha automática -->
+  <!-- Fecha automática -->
   <script>
-    const dateElements = document.querySelectorAll('.auto-date');
+    const elements = document.querySelectorAll('.auto-date');
     const today = new Date();
 
-    const formattedDate = today.toLocaleDateString('es-ES', {
+    const formatted = today.toLocaleDateString('es-ES', {
       day: '2-digit',
       month: 'long',
       year: 'numeric'
     });
 
-    dateElements.forEach(el => {
-      el.textContent = formattedDate;
-    });
+    elements.forEach(el => el.textContent = formatted);
   </script>
 
 </body>

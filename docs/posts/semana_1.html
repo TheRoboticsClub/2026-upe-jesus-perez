@@ -16,315 +16,330 @@
     </p>
   </header>
 
-<main>
-  <article>
+  <main>
+    <article>
 
-    <!-- CAJA 1 -->
-    <section class="content-card">
+      <!-- CAJA 1 -->
+      <section class="content-card">
 
-      <h2>Objetivos</h2>
-      <p>
-        Inicializarme con el uso de GitHub Pages y la plataforma Robotics Academy.
-      </p>
+        <h2>Objetivos</h2>
+        <p>
+          Inicializarme con el uso de GitHub Pages y la plataforma Robotics Academy.
+        </p>
 
-      <p>
-        Durante el inicio de las prácticas, el primer paso que realicé fue seguir la
-        guía oficial de usuario de <strong>Robotics Academy</strong>, disponible en el
-        siguiente enlace:
-        <a href="https://jderobot.github.io/RoboticsAcademy/user_guide/" target="_blank">
-          https://jderobot.github.io/RoboticsAcademy/user_guide/
-        </a>.
-      </p>
+        <p>
+          Durante el inicio de las prácticas, el primer paso que realicé fue seguir la
+          guía de usuario de <strong>Robotics Academy</strong>, disponible en:
+          <a href="https://jderobot.github.io/RoboticsAcademy/user_guide/" target="_blank">
+            https://jderobot.github.io/RoboticsAcademy/user_guide/
+          </a>.
+        </p>
 
-      <p>
-        Una vez revisada la documentación, he estado aprendiendo y experimentando con
-        <strong>GitHub Pages</strong>, entendiendo cómo funciona y mejorando el aspecto
-        del primer intento.
-      </p>
+        <p>
+          Tras revisar la documentación, estuve aprendiendo y experimentando con
+          <strong>GitHub Pages</strong>, comprendiendo su funcionamiento y mejorando
+          el aspecto del primer intento.
+        </p>
 
-      <h2>Pasos realizados</h2>
+        <h2>Pasos realizados</h2>
 
-      <p>
-        El primer paso fue clonar el repositorio donde se crearía el GitHub Pages.
-        Una vez clonado, creé dentro de la carpeta <code>docs</code> dos subcarpetas
-        (<code>posts</code> e <code>images</code>) y dos archivos
-        (<code>index.html</code> y <code>style.css</code>).
-      </p>
+        <p>
+          Se clonó el repositorio y se creó la carpeta <code>docs</code> con las
+          subcarpetas <code>posts</code> e <code>images</code>, junto a los archivos
+          <code>index.html</code> y <code>style.css</code>.
+        </p>
 
-      <p>
-        La carpeta <code>posts</code> sirve para añadir cada una de las semanas al blog,
-        mientras que la carpeta <code>images</code> almacena las imágenes utilizadas.
-        El archivo <code>index.html</code> define la estructura y el contenido principal,
-        y <code>style.css</code> define el diseño visual.
-      </p>
+        <p>
+          El archivo <code>index.html</code> define la estructura del blog y
+          <code>style.css</code> el diseño visual.
+        </p>
 
-      <p>
-        Después de varias pruebas, los archivos <strong>index.html</strong> y
-        <strong>style.css</strong> quedaron de la siguiente forma:
-      </p>
+        <h3>Index.html:</h3>
+        <pre><code>
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+            <meta charset="UTF-8">
+            <title>Blog de Prácticas</title>
+            <link rel="stylesheet" href="style.css">
+            </head>
 
-      <h3>index.html</h3>
-      <pre><code>
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-        <meta charset="UTF-8">
-        <title>Blog de Prácticas</title>
-        <link rel="stylesheet" href="style.css">
-        </head>
+            <body class="home">
 
-        <body class="home">
+            <!-- Logo fijo arriba a la derecha -->
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo">
+            </div>
 
-        <!-- Logo fijo arriba a la derecha -->
-        <div class="logo">
-            <img src="images/logo.png" alt="Logo">
-        </div>
+            <div class="layout">
 
-        <div class="layout">
+                <!-- Barra lateral -->
+                <aside class="sidebar">
+                <img class="profile-pic" src="images/profile.jpeg" alt="Foto de perfil">
 
-            <!-- Barra lateral -->
-            <aside class="sidebar">
-            <img class="profile-pic" src="images/profile.jpeg" alt="Foto de perfil">
+                <h2>Jesús Pérez</h2>
+                <p class="role">Estudiante en prácticas</p>
 
-            <h2>Jesús Pérez</h2>
-            <p class="role">Estudiante en prácticas</p>
-
-            <p class="description">
-                Blog de seguimiento semanal de mis prácticas en JdeRobot.
-            </p>
-            </aside>
-
-            <!-- Contenido -->
-            <main class="content">
-            <h1>Entradas</h1>
-
-            <a class="post-card" href="posts/semana_1.html">
-                <h3>Semana 1 · Inicio de las prácticas</h3>
-
-                <p class="post-excerpt">
-                Configuración del entorno de trabajo, revisión de la guía oficial
-                de Robotics Academy y primeras pruebas con GitHub Pages.
+                <p class="description">
+                    Blog de seguimiento semanal de mis prácticas en JdeRobot.
                 </p>
+                </aside>
 
-                <span class="post-date">
-                <span class="auto-date"></span>
-                </span>
-            </a>
-            </main>
+                <!-- Contenido -->
+                <main class="content">
+                <h1>Entradas</h1>
 
-        </div>
-        </body>
-        </html>
-      </code></pre>
+                <a class="post-card" href="posts/semana_1.html">
+                    <h3>Semana 1 · Inicio de las prácticas</h3>
 
-      <h3>style.css</h3>
-      <pre><code>
-        /* Reset */
-        * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        }
+                    <p class="post-excerpt">
+                    Configuración del entorno de trabajo, revisión de la guía oficial
+                    de Robotics Academy y primeras pruebas con GitHub Pages.
+                    </p>
 
-        /* Base */
-        body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Roboto, Ubuntu, Cantarell, sans-serif;
-        background: linear-gradient(180deg, #020617, #0f172a);
-        color: #e5e7eb;
-        line-height: 1.7;
-        }
+                    <span class="post-date">
+                    <span class="auto-date"></span>
+                    </span>
+                </a>
+                </main>
 
-        a {
-        color: #67e8f9;
-        text-decoration: none;
-        }
+            </div>
 
-        a:hover {
-        text-decoration: underline;
-        }
+            <!-- Fecha automática -->
+            <script>
+                const elements = document.querySelectorAll('.auto-date');
+                const Today = new Date();
 
-        /* Logo */
-        .logo {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        }
+                const formatted = Today.toLocaleDateString('es-ES', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+                });
 
-        .logo img {
-        height: 40px;
-        }
+                elements.forEach(el => el.textContent = formatted);
+            </script>
 
-        /* Layout principal*/
-        body.home .layout {
-        display: grid;
-        grid-template-columns: 260px 1fr;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 80px 20px;
-        gap: 40px;
-        }
+            </body>
+            </html>
+        </code></pre>
 
-        /* Barra lateral */
-        .sidebar {
-        background-color: #020617;
-        padding: 30px 20px;
-        border-radius: 12px;
-        text-align: center;
-        }
+        <h3>style.css:</h3>
+        <pre><code>
+            /* Reset */
+            * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            }
 
-        .profile-pic {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 15px;
-        }
+            /* Base */
+            body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                        Roboto, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(180deg, #020617, #0f172a);
+            color: #e5e7eb;
+            line-height: 1.7;
+            }
 
-        .sidebar h2 {
-        margin-bottom: 5px;
-        }
+            a {
+            color: #67e8f9;
+            text-decoration: none;
+            }
 
-        .role {
-        color: #9ca3af;
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-        }
+            a:hover {
+            text-decoration: underline;
+            }
 
-        .description {
-        font-size: 0.9rem;
-        color: #d1d5db;
-        }
+            /* Logo */
+            .logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            }
 
-        /* Entradas */
-        .content h1 {
-        margin-bottom: 25px;
-        }
+            .logo img {
+            height: 40px;
+            }
 
-        .post-card {
-        display: block;
-        background-color: #020617;
-        padding: 20px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-        transition: transform 0.2s, background-color 0.2s;
-        }
+            /* Layout principal */
+            body.home .layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            gap: 40px;
+            }
 
-        .post-card:hover {
-        transform: translateY(-4px);
-        background-color: #020617cc;
-        }
+            /* Sidebar */
+            .sidebar {
+            background-color: #020617;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            }
 
-        .post-card h3 {
-        margin-bottom: 10px;
-        }
+            .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            }
 
-        .post-excerpt {
-        color: #d1d5db;
-        margin-bottom: 10px;
-        }
+            .sidebar h2 {
+            margin-bottom: 5px;
+            }
 
-        .post-date {
-        font-size: 0.8rem;
-        color: #9ca3af;
-        }
+            .role {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            }
 
-        /* Pagina de post*/
-        body.post header,
-        body.post main {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 60px 20px;
-        }
+            .description {
+            font-size: 0.9rem;
+            color: #d1d5db;
+            }
 
-        body.post header {
-        padding-bottom: 20px;
-        }
+            /* Tarjetas principales */
+            .content h1 {
+            margin-bottom: 25px;
+            }
 
-        body.post header h1 {
-        font-size: 2.6rem;
-        margin-bottom: 10px;
-        }
+            .post-card {
+            display: block;
+            background-color: #020617;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: transform 0.2s, background-color 0.2s;
+            }
 
-        body.post header p {
-        color: #9ca3af;
-        }
+            .post-card:hover {
+            transform: translateY(-4px);
+            background-color: #020617cc;
+            }
 
-        body.post article {
-        background-color: #020617;
-        padding: 40px;
-        border-radius: 12px;
-        }
+            .post-card h3 {
+            margin-bottom: 10px;
+            }
 
-        body.post h2 {
-        margin-top: 40px;
-        margin-bottom: 15px;
-        }
+            .post-excerpt {
+            color: #d1d5db;
+            margin-bottom: 10px;
+            }
 
-        body.post p {
-        margin-bottom: 16px;
-        color: #d1d5db;
-        }
+            .post-date {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            }
 
-        /* Tarjetas dentro de las semanas */
-        .content-card {
-        background-color: #020617;
-        border-radius: 12px;
-        padding: 30px;
-        margin-bottom: 30px;
-        border: 1px solid #1f2933;
-        }
+            /* Pagina posts */
+            body.post header,
+            body.post main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            }
 
-        .content-card h2:first-child,
-        .content-card h3:first-child {
-        margin-top: 0;
-        }
+            body.post header {
+            padding-bottom: 20px;
+            }
 
-        /* Código */
-        pre {
-        background-color: #020617;
-        border: 1px solid #1f2933;
-        padding: 16px;
-        border-radius: 6px;
-        overflow-x: auto;
-        margin-bottom: 20px;
-        }
+            body.post header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 10px;
+            }
 
-        code {
-        color: #a5f3fc;
-        font-family: "Fira Code", monospace;
-        font-size: 0.9rem;
-        }
+            body.post header p {
+            color: #9ca3af;
+            }
 
-        /* Volver */
-        .back {
-        display: inline-block;
-        margin-top: 30px;
-        color: #93c5fd;
-        }
+            body.post article {
+            background-color: #020617;
+            padding: 40px;
+            border-radius: 12px;
+            }
 
-      </code></pre>
+            body.post h2 {
+            margin-top: 40px;
+            margin-bottom: 15px;
+            }
 
-      <h2>Resultado</h2>
-      <p>Resultado de la configuración inicial:</p>
-      <img src="../images/Semana_1/resultado_inicial.png" alt="Resultado inicial">
+            body.post p {
+            margin-bottom: 16px;
+            color: #d1d5db;
+            }
 
-      <p>Resultado de la configuración de la Semana 1:</p>
-      <img src="../images/Semana_1/resultado_semana1.png" alt="Resultado semana 1">
+            /* Tarjetas internas */
+            .content-card {
+            background-color: #020617;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #1f2933;
+            }
 
-    </section>
+            .content-card h2:first-child,
+            .content-card h3:first-child {
+            margin-top: 0;
+            }
 
-    <!-- CAJA 2 (VACÍA POR AHORA) -->
-    <section class="content-card">
-      <h2>Follow line</h2>
-      <p>Realización del ejercicio follow line de RoboticsAcademy</p>
-    </section>
+            /* Codigo */
+            pre {
+            background-color: #020617;
+            border: 1px solid #1f2933;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            }
 
-    <a class="back" href="../index.html">← Volver al índice</a>
+            code {
+            color: #a5f3fc;
+            font-family: "Fira Code", monospace;
+            font-size: 0.9rem;
+            }
 
-  </article>
-</main>
+            /* Imagenes en post */
+            body.post img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            }
 
+            /* Volver */
+            .back {
+            display: inline-block;
+            margin-top: 30px;
+            color: #93c5fd;
+            }
+        </code></pre>
+
+        <h2>Resultado</h2>
+        <p>Configuración inicial:</p>
+        <img src="../images/Semana_1/resultado_inicial.png" alt="Resultado inicial">
+
+        <p>Resultado final de la Semana 1:</p>
+        <img src="../images/Semana_1/resultado_semana1.png" alt="Resultado semana 1">
+
+      </section>
+
+      <!-- CAJA 2 -->
+      <section class="content-card">
+        <h2>Follow line</h2>
+        <p>
+          Realización del ejercicio <em>follow line</em> de Robotics Academy.
+        </p>
+      </section>
+
+      <a class="back" href="../index.html">← Volver al índice</a>
+
+    </article>
+  </main>
 
   <!-- Fecha automática -->
   <script>

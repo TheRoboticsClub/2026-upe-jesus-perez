@@ -34,7 +34,7 @@ a:hover {
   height: 40px;
 }
 
-/* Layout principal*/
+/* Layout principal */
 body.home .layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -44,7 +44,7 @@ body.home .layout {
   gap: 40px;
 }
 
-/* Barra lateral */
+/* Sidebar */
 .sidebar {
   background-color: #020617;
   padding: 30px 20px;
@@ -75,7 +75,7 @@ body.home .layout {
   color: #d1d5db;
 }
 
-/* Entradas */
+/* Tarjetas principales */
 .content h1 {
   margin-bottom: 25px;
 }
@@ -108,7 +108,7 @@ body.home .layout {
   color: #9ca3af;
 }
 
-/* Pagina de post*/
+/* Pagina posts */
 body.post header,
 body.post main {
   max-width: 900px;
@@ -145,7 +145,7 @@ body.post p {
   color: #d1d5db;
 }
 
-/* Tarjetas dentro de las semanas */
+/* Tarjetas internas */
 .content-card {
   background-color: #020617;
   border-radius: 12px;
@@ -159,7 +159,7 @@ body.post p {
   margin-top: 0;
 }
 
-/* Código */
+/* Codigo */
 pre {
   background-color: #020617;
   border: 1px solid #1f2933;
@@ -173,6 +173,15 @@ code {
   color: #a5f3fc;
   font-family: "Fira Code", monospace;
   font-size: 0.9rem;
+}
+
+/* Imagenes en post */
+body.post img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
 }
 
 /* Volver */

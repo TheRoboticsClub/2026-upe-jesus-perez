@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Semana 2 · Toma de contacto con Unibotics e despliegue de D1</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="home">
+
+  <div class="layout">
+
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+      <img class="profile-pic" src="../../images/logo.png" alt="Logo">
+
+      <h2>Jesús Pérez</h2>
+      <p class="role">Estudiante en prácticas</p>
+
+      <p class="description">
+        Blog de seguimiento semanal de mis prácticas en JdeRobot.
+      </p>
+    </aside>
+
+    <!-- Contenido -->
+    <main class="content">
+      <h1>Semana 2 · Toma de contacto con Unibotics e despliegue de D1</h1>
+
+      <a class="post-card" href="github_pages.html">
+        <h3>Realización del ejercicio follow_line en Unibotics</h3>
+        <p class="post-excerpt">
+          Realización del ejercicio follow_line y toma de contacto con
+          la plataforma Unibotics. Resuelto usando HAL y ROS2.
+        </p>
+        <span class="post-date">
+          <span class="auto-date"></span>
+        </span>
+      </a>
+
+      <a class="post-card" href="follow_line_RoboticsAcademy.html">
+        <h3>Instalación y desarrollo del despliegue en local de Unibotics Webserver(D1)</h3>
+        <p class="post-excerpt">
+          
+        </p>
+        <span class="post-date">
+          <span class="auto-date"></span>
+        </span>
+      </a>
+
+      <a class="back" href="../index.html">← Volver al índice principal</a>
+    </main>
+
+  </div>
+
+  <!-- Fecha automática (para TODAS las tarjetas) -->
+  <script>
+    const dateElements = document.querySelectorAll('.auto-date');
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    dateElements.forEach(el => {
+      el.textContent = formattedDate;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Pages · Semana 1</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="post">
+  <header>
+    <h1>Instalación y desarrollo del despliegue en local de Unibotics Webserver(D1)</h1>
+    <p>
+      Semana 1 ·
+      <span class="auto-date"></span>
+    </p>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- CAJA PRINCIPAL -->
+      <section class="content-card">
+
+        <h2>Objetivos</h2>
+        <p>
+          Instalación y desarrollo del despliegue en local de Unibotics Webserver(D1)
+        </p>
+
+        <h2>Pasos realizados</h2>
+        <p>
+          Durante esta sesión se realizó la configuración completa del entorno de desarrollo de Unibotics, 
+          resolviendo varios problemas habituales relacionados con dependencias, submódulos y versiones.
+          En primer lugar, se clonó y actualizó el repositorio principal asegurando que todos los submódulos 
+          (RoboticsAcademy, BtStudio, RoboticsInfrastructure, versiones premium, etc.) estuvieran correctamente inicializados y sincronizados, 
+          ya que muchos errores de Module not found provenían de submódulos incompletos o en estado desacoplado (detached HEAD).
+          A continuación, se configuró el frontend en React, instalando correctamente Node.js mediante nvm, 
+          resolviendo conflictos de versiones entre npm, yarn, react-router y webpack-cli. Una vez alineadas las versiones, 
+          se consiguió compilar el frontend con webpack en modo desarrollo sin errores críticos.
+          También se creó correctamente el archivo common.zip a partir de RoboticsAcademy, 
+          necesario para que webpack pueda resolver dependencias compartidas del frontend.
+          Por último, se trabajó con Docker, entendiendo cómo gestionar contenedores 
+          (listar, entrar, copiar archivos, eliminar contenedores).
+          El resultado final fue un entorno funcional, con el frontend compilando correctamente, s
+          ubmódulos sincronizados y la base preparada para ejecutar servicios backend en contenedores Docker.
+        </p>
+
+
+      </section>
+
+      <a class="back" href="semana_1.html">← Volver a Semana 1</a>
+
+    </article>
+  </main>
+
+  <!-- Fecha automática -->
+  <script>
+    const dateElement = document.querySelector('.auto-date');
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    dateElement.textContent = formattedDate;
+  </script>
+
+</body>
+</html>

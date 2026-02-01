@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Pages · Semana 2</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="post">
+  <header>
+    <h1>Análisis del ejercicio pick and place, profundizando en la arquitectura del sistema, el uso del HAL 
+        y la interacción entre ROS 2 y Gazebo Classic.</h1>
+    <p>
+      Semana 1 ·
+      <span class="auto-date"></span>
+    </p>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- CAJA PRINCIPAL -->
+      <section class="content-card">
+
+        <h2>Objetivos</h2>
+        <p>
+          En este trabajo he comenzado explorando el entorno de desarrollo de RoboticsAcademy, 
+          entendiendo su arquitectura general y el flujo completo desde el código del ejercicio hasta la simulación en Gazebo.
+          El objetivo principal ha sido comprender cómo se ejecuta un ejercicio robótico sin interactuar directamente con ROS a bajo nivel.
+        </p>
+
+        <h2>Tareas realizadas:</h2>
+        <h3>- Análisis del HAL (Hardware Abstraction Layer)</h3>
+        <p>
+            He analizado el archivo hal.py, que actúa como una capa de abstracción entre el código del ejercicio y el robot simulado. 
+            Este archivo encapsula toda la complejidad de ROS 2, MoveIt y Gazebo, ofreciendo una API sencilla con funciones como MoveLinear,
+            MoveAbsJ o GripperSet, que permiten controlar el robot sin necesidad de programar nodos ROS manualmente.
+            El HAL no implementa directamente la lógica del robot, sino que reutiliza paquetes externos, 
+            en concreto ros2_SimRealRobotControl, desde donde se importan clases y mensajes mediante rutas dinámicas
+            obtenidas con ament_index_python. De este modo, el HAL actúa como un “pegamento” que conecta distintos subsistemas.
+        </p>
+
+        <h3>- Uso de Gazebo Classic</h3>
+        <p>
+            Uno de los puntos clave del análisis ha sido entender qué partes del sistema dependen específicamente de Gazebo Classic. 
+            En el HAL se utilizan servicios como AttachLink y DetachLink, proporcionados por un plugin de Gazebo Classic, 
+            que permiten simular el agarre de objetos mediante la creación y destrucción de uniones rígidas entre enlaces.
+            Este mecanismo no simula un agarre físico real, sino un agarre lógico, 
+            suficiente para ejercicios educativos como Pick & Place. Esto explica por qué este ejercicio no es 
+            compatible directamente con Gazebo Harmonic, ya que dichos servicios no existen en esa versión del simulador. 
+        </p>
+      </section>
+
+      <a class="back" href="semana_2.html">← Volver a Semana 2</a>
+
+    </article>
+  </main>
+
+  <!-- Fecha automática -->
+  <script>
+    const dateElement = document.querySelector('.auto-date');
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    dateElement.textContent = formattedDate;
+  </script>
+
+</body>
+</html>

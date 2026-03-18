@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Pages · Semana 3</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="post">
+  <header>
+    <h1>Separación de launcher en dos, uno para el robot y otro para el mundo.</h1>
+    <p>
+      Semana 3 ·
+      <span class="auto-date"></span>
+    </p>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- CAJA PRINCIPAL -->
+      <section class="content-card">
+
+        <h2>Objetivos</h2>
+        <p>
+          En esta parte del trabajo se ha abordado la reestructuración del sistema de lanzamiento en Gazebo Harmonic, 
+          separando la inicialización del robot y del entorno en dos launchers independientes. 
+          El objetivo principal ha sido mejorar la modularidad, flexibilidad y mantenibilidad del sistema, 
+          permitiendo ejecutar y depurar de forma aislada cada uno de los componentes de la simulación.
+        </p>
+
+        <h2>Tareas realizadas:</h2>
+
+        <h3>- Análisis del launcher original</h3>
+        <p>
+          En primer lugar, se ha analizado el launcher inicial, en el que tanto el robot como el mundo de simulación 
+          se lanzaban conjuntamente en un único archivo. Este enfoque dificultaba la reutilización de componentes 
+          y complicaba la depuración, ya que cualquier cambio requería reiniciar toda la simulación completa.
+        </p>
+
+        <h3>- Separación en launcher de mundo</h3>
+        <p>
+          Se ha creado un launcher específico encargado únicamente de iniciar Gazebo Harmonic con el entorno de simulación. 
+          Este launcher se encarga de cargar el mundo, los modelos estáticos y los objetos del escenario, 
+          sin incluir la lógica del robot. De este modo, se puede validar el entorno de forma independiente 
+          y reutilizarlo con distintos robots o configuraciones.
+        </p>
+
+        <h3>- Separación en launcher de robot</h3>
+        <p>
+          Paralelamente, se ha desarrollado un launcher independiente para el robot, encargado de cargar la descripción 
+          (URDF/XACRO), los controladores de ros2_control y la integración con MoveIt2. 
+          Este launcher permite inicializar únicamente el robot sobre un entorno ya existente, facilitando pruebas específicas 
+          de cinemática, control y planificación de movimiento sin necesidad de relanzar el mundo completo.
+        </p>
+
+        <h3>- Integración entre ambos launchers</h3>
+        <p>
+          Se ha definido un mecanismo de coordinación entre ambos launchers, de forma que el robot pueda conectarse correctamente 
+          al entorno de Gazebo ya en ejecución. Esto incluye la correcta sincronización de namespaces, parámetros y controladores, 
+          así como la gestión de tiempos de espera para asegurar que el simulador esté completamente inicializado antes de cargar el robot.
+        </p>
+
+        <h3>- Ventajas de la arquitectura modular</h3>
+        <p>
+          La separación del sistema en dos launchers independientes aporta múltiples ventajas. 
+          Por un lado, permite una mayor reutilización de componentes, ya que el mismo mundo puede emplearse con distintos robots. 
+          Por otro, facilita la depuración y el desarrollo incremental, al poder trabajar sobre el robot o el entorno de forma aislada. 
+          Además, esta arquitectura es más escalable y se adapta mejor a sistemas complejos o distribuidos.
+        </p>
+      <a class="back" href="semana_3.html">← Volver a Semana 3</a>
+
+      <h3>- robot.launch.py</h3>
+        <textarea>
+          """
+          Pick Place Harmonic - Robot Launcher
+          Wraps spawn_robot_warehouse.launch.py
+          """
+
+          import os
+          from launch import LaunchDescription
+          from launch.actions import IncludeLaunchDescription
+          from launch.launch_description_sources import PythonLaunchDescriptionSource
+          from ament_index_python.packages import get_package_share_directory
+
+
+          def generate_launch_description():
+
+              try:
+                  ur5_gripper_pkg = get_package_share_directory("ur5_gripper_description")
+              except Exception as e:
+                  print(f"ERROR: Cannot find ur5_gripper_description package: {e}")
+                  print("Make sure packages are built in /home/ws")
+                  raise
+
+              warehouse_launch_file = os.path.join(
+                  ur5_gripper_pkg, "launch", "spawn_robot_warehouse.launch.py"
+              )
+
+              print(f"Including launch file: {warehouse_launch_file}")
+
+              warehouse_launch = IncludeLaunchDescription(
+                  PythonLaunchDescriptionSource(warehouse_launch_file),
+                  launch_arguments={
+                      "launch_rviz": "false",
+                  }.items(),
+              )
+
+              return LaunchDescription([warehouse_launch])
+        </textarea>
+
+      <h3>- world.launch.py</h3>
+        <textarea>
+          """
+          Pick Place Harmonic - World Launcher
+          Configures Gazebo resource paths
+          """
+
+          import os
+          from launch import LaunchDescription
+          from launch.actions import (
+              DeclareLaunchArgument,
+              ExecuteProcess,
+              IncludeLaunchDescription,
+              SetEnvironmentVariable,
+              AppendEnvironmentVariable,
+          )
+          from launch.launch_description_sources import PythonLaunchDescriptionSource
+          from ament_index_python.packages import get_package_share_directory
+          from launch_ros.actions import Node
+
+
+          def generate_launch_description():
+
+              package_dir = get_package_share_directory("custom_robots")
+              robotiq_description_pkg = get_package_share_directory("robotiq_description")
+              ur5_gripper_pkg = get_package_share_directory("ur5_gripper_description")
+              robotiq_pkg_share_dir = get_package_share_directory("robotiq_description")
+              ros_gz_sim = get_package_share_directory("ros_gz_sim")
+
+              warehouse_models_path = os.path.join(robotiq_pkg_share_dir, "world", "models")
+              ur5_share_parent = os.path.dirname(ur5_gripper_pkg)
+              robotiq_share_parent = os.path.dirname(robotiq_pkg_share_dir)
+
+              world_path = os.path.join(
+                  robotiq_pkg_share_dir, "world", "warehouse_arm_harmonic.world"
+              )
+
+              gazebo_models_path = os.path.join(package_dir, "models")
+
+              gz_ros2_control_install = "/home/ws/install"
+              gz_lib_path = os.path.join(gz_ros2_control_install, "gz_ros2_control", "lib")
+
+              resource_path = (
+                  ur5_share_parent + ":" + robotiq_share_parent + ":" + warehouse_models_path
+              )
+
+              gz_env = {
+                  "GZ_SIM_RESOURCE_PATH": resource_path,
+                  "GZ_SIM_SYSTEM_PLUGIN_PATH": gz_lib_path + ":/opt/ros/humble/lib",
+                  "LD_LIBRARY_PATH": gz_lib_path
+                  + ":/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu",
+                  "DISPLAY": ":2",
+              }
+
+              # gazebo_server = IncludeLaunchDescription(
+              #     PythonLaunchDescriptionSource(
+              #         os.path.join(ros_gz_sim, "launch", "gz_sim.launch.py")
+              #     ),
+              #     launch_arguments={
+              #         "gz_args": ["-r -s -v4 ", world_path],
+              #         "on_exit_shutdown": "true",
+              #         "additional_env": gz_env,
+              #     }.items(),
+              # )
+
+              gazebo = ExecuteProcess(
+                  cmd=["gz", "sim", "-s", "-r", "-v", "4", world_path],
+                  output="screen",
+                  additional_env=gz_env,
+                  shell=False,
+              )
+
+              world_entity_cmd = Node(
+                  package="ros_gz_sim",
+                  executable="create",
+                  arguments=["-name", "world", "-file", world_path],
+                  output="screen",
+              )
+
+              ld = LaunchDescription()
+
+              ld.add_action(
+                  SetEnvironmentVariable(
+                      "GZ_SIM_RESOURCE_PATH",
+                      gazebo_models_path + ":" + ur5_gripper_pkg + ":" + robotiq_description_pkg,
+                  )
+              )
+              set_env_vars_resources = AppendEnvironmentVariable(
+                  "GZ_SIM_RESOURCE_PATH",
+                  gazebo_models_path + ":" + ur5_gripper_pkg + ":" + robotiq_description_pkg,
+              )
+              ld.add_action(set_env_vars_resources)
+              ld.add_action(gazebo)
+              ld.add_action(world_entity_cmd)
+
+              return ld
+        </textarea>
+
+    </article>
+  </main>
+
+  <!-- Fecha automática -->
+  <script>
+    const dateElement = document.querySelector('.auto-date');
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    dateElement.textContent = formattedDate;
+  </script>
+
+</body>
+</html>

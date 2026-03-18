@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Pages · Semana 3</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="post">
+  <header>
+    <h1>Arreglar y crear un nuevo plugin para el agarre de la pinza en gazebo harmonic del ejercicio pick and place</h1>
+    <p>
+      Semana 6 y 7 ·
+      <span class="auto-date"></span>
+    </p>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- CAJA PRINCIPAL -->
+      <section class="content-card">
+
+        <h2>Objetivos</h2>
+        <p>
+        En esta parte del trabajo se ha abordado la adaptación y desarrollo de un plugin de agarre para Gazebo Harmonic, 
+        con el objetivo de habilitar el funcionamiento del ejercicio de Pick & Place en este entorno. 
+        Debido a la ausencia del plugin de enlace utilizado en Gazebo Classic, ha sido necesario implementar 
+        una solución alternativa compatible con la arquitectura ECS (Entity Component System) de Gazebo Harmonic.
+        </p>
+
+        <h2>Tareas realizadas:</h2>
+
+        <h3>- Análisis del plugin en Gazebo Classic</h3>
+        <p>
+        En primer lugar, se ha estudiado el funcionamiento del plugin de agarre utilizado en Gazebo Classic, 
+        que permite simular la sujeción de objetos mediante la creación de joints físicos entre enlaces. 
+        Este plugin utiliza directamente la API del motor físico para crear y destruir uniones, 
+        lo que facilita tanto el attach como el detach de los objetos durante la ejecución del ejercicio.
+        </p>
+
+        <h3>- Identificación de limitaciones en Gazebo Harmonic</h3>
+        <p>
+        Se ha comprobado que Gazebo Harmonic no ofrece una implementación equivalente directa, 
+        ya que su arquitectura basada en ECS requiere gestionar explícitamente los componentes del sistema. 
+        En particular, la creación y eliminación de uniones entre enlaces se realiza mediante componentes 
+        como DetachableJoint, lo que implica un cambio significativo en la forma de implementar el agarre.
+        </p>
+
+        <h3>- Desarrollo del plugin LinkAttacher para Harmonic</h3>
+        <p>
+        Se ha implementado un nuevo plugin que reproduce la funcionalidad de attach y detach en Gazebo Harmonic. 
+        Este plugin crea dinámicamente una entidad con un componente DetachableJoint que conecta el efector final del robot 
+        con el objeto a manipular. Para ello, se han desarrollado funciones de búsqueda de entidades (modelos y enlaces) 
+        dentro del Entity Component Manager y se han gestionado las solicitudes de attach y detach mediante servicios ROS 2.
+        </p>
+
+        <h3>- Corrección del funcionamiento del detach</h3>
+        <p>
+        Durante el desarrollo se ha identificado un problema en la operación de detach, 
+        en la que los objetos permanecían unidos al robot incluso tras solicitar su liberación. 
+        Este comportamiento se debía a una eliminación incompleta del joint en el sistema ECS. 
+        La solución ha consistido en gestionar correctamente la entidad asociada al DetachableJoint, 
+        eliminándola mediante RequestRemoveEntity y manteniendo una referencia al joint activo 
+        para garantizar su correcta destrucción.
+        </p>
+
+        <h3>- Integración con el HAL y ROS 2</h3>
+        <p>
+        El plugin se ha integrado con el sistema mediante servicios ROS 2 (AttachLink y DetachLink), 
+        permitiendo que el HAL invoque las operaciones de agarre y liberación durante la ejecución del ejercicio. 
+        Para ello, se ha utilizado el paquete linkattacher_msgs, asegurando la compatibilidad con la arquitectura existente.
+        </p>
+
+        <h3>- Validación del comportamiento</h3>
+        <p>
+        Finalmente, se ha validado el funcionamiento del plugin comprobando que el robot es capaz de agarrar y soltar objetos 
+        correctamente durante la ejecución del Pick & Place en Gazebo Harmonic. 
+        Se han realizado pruebas para verificar la estabilidad del agarre, la correcta liberación de los objetos 
+        y la compatibilidad con el resto del sistema.
+        </p>
+
+      <a class="back" href="semana_5.html">← Volver a Semana 5</a>
+
+    </article>
+  </main>
+
+  <!-- Fecha automática -->
+  <script>
+    const dateElement = document.querySelector('.auto-date');
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    dateElement.textContent = formattedDate;
+  </script>
+
+</body>
+</html>

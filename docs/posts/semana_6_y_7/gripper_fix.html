@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Pages · Semana 3</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="post">
+  <header>
+    <h1>Añadir visor de imagen en el ejercicio machine vision en gazebo classic</h1>
+    <p>
+      Semana 5 ·
+      <span class="auto-date"></span>
+    </p>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- CAJA PRINCIPAL -->
+      <section class="content-card">
+
+        <h2>Objetivos</h2>
+        <p>
+        En esta parte del trabajo se ha incorporado un visor de imágenes al ejercicio de Machine Vision en Gazebo Classic, 
+        con el objetivo de facilitar la visualización en tiempo real de los datos capturados por la cámara del robot 
+        y del procesamiento aplicado sobre ellos. Esta herramienta permite mejorar la comprensión del sistema de percepción 
+        y simplificar las tareas de depuración y validación.
+        </p>
+
+        <h2>Tareas realizadas:</h2>
+
+        <h3>- Captura de imágenes desde el simulador</h3>
+        <p>
+        Se ha utilizado la interfaz proporcionada por RoboticsAcademy para acceder a las imágenes generadas por la cámara simulada 
+        en Gazebo Classic. Estas imágenes son recibidas en el código del ejercicio y constituyen la base del sistema de visión.
+        </p>
+
+        <h3>- Implementación del visor de imágenes</h3>
+        <p>
+        Se ha desarrollado un visor que permite mostrar en tiempo real las imágenes capturadas por la cámara. 
+        Este visor presenta tanto la imagen original como, en su caso, las imágenes procesadas, 
+        facilitando la comparación entre la entrada y la salida del sistema de visión.
+        </p>
+
+        <h3>- Visualización del procesamiento</h3>
+        <p>
+        El visor se ha integrado con el pipeline de procesamiento de imagen, mostrando resultados intermedios 
+        como máscaras de segmentación, detección de contornos o regiones de interés. 
+        Esto permite analizar visualmente el funcionamiento de los algoritmos implementados 
+        y ajustar sus parámetros de manera más precisa.
+        </p>
+
+        <h3>- Integración con el ejercicio</h3>
+        <p>
+        El visor se ha integrado dentro del flujo del ejercicio de Machine Vision sin interferir con la lógica principal, 
+        permitiendo su activación durante la ejecución. De este modo, se puede observar en tiempo real 
+        cómo evoluciona la percepción mientras el robot realiza sus tareas.
+        </p>
+
+        <h3>- Ventajas para depuración y aprendizaje</h3>
+        <p>
+        La incorporación del visor de imágenes aporta una herramienta clave para la depuración del sistema, 
+        ya que permite identificar errores en la detección o en el procesamiento de forma inmediata. 
+        Además, mejora la comprensión del comportamiento del algoritmo de visión, 
+        siendo especialmente útil en un contexto educativo.
+        </p>
+
+      <a class="back" href="semana_5.html">← Volver a Semana 5</a>
+
+    </article>
+  </main>
+
+  <!-- Fecha automática -->
+  <script>
+    const dateElement = document.querySelector('.auto-date');
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    dateElement.textContent = formattedDate;
+  </script>
+
+</body>
+</html>

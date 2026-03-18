@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Pages · Semana 3</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="post">
+  <header>
+    <h1>Migración del ejercicio pick and place a gazebo Harmonic</h1>
+    <p>
+      Semana 3 ·
+      <span class="auto-date"></span>
+    </p>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- CAJA PRINCIPAL -->
+      <section class="content-card">
+
+        <h2>Objetivos</h2>
+        <p>
+          En este trabajo he desarrollado una solución completa del ejercicio de Pick & Place utilizando Gazebo Harmonic. 
+          El objetivo principal ha sido adaptar el flujo de trabajo existente en RoboticsAcademy, originalmente basado en Gazebo Classic, 
+          a la nueva arquitectura de Harmonic, comprendiendo tanto el control del robot mediante MoveIt como la interacción con objetos en el simulador.
+        </p>
+
+        <h2>Tareas realizadas:</h2>
+
+        <h3>- Desarrollo de la solución de Pick & Place</h3>
+        <p>
+          He implementado una solución secuencial para el ejercicio de Pick & Place utilizando las funciones del HAL, 
+          como MoveAbsJ, MoveJoint, MoveRelLinear y GripperSet. 
+          La solución sigue una estructura modular en la que, para cada objeto, se realiza un ciclo completo de recogida y colocación:
+          movimiento a una posición aproximada, descenso controlado, cierre del gripper, elevación, transporte mediante puntos intermedios 
+          y liberación en el destino correspondiente. Además, se han definido puntos de transición para evitar colisiones 
+          y mejorar la estabilidad del movimiento del robot.
+        </p>
+
+        <h3>- Adaptación del HAL a Gazebo Harmonic</h3>
+        <p>
+          He analizado y utilizado una versión adaptada del HAL para Gazebo Harmonic, en la que el control del robot se realiza mediante 
+          servicios de cinemática inversa (IK) proporcionados por MoveIt2 y ejecución de trayectorias mediante ros2_control. 
+          A diferencia de Gazebo Classic, en esta versión el agarre de objetos no se basa en un plugin físico por defecto, 
+          sino en la interacción con un plugin específico de tipo LinkAttacher que permite crear y eliminar uniones entre enlaces.
+        </p>
+
+        <h3>- Implementación y depuración del plugin LinkAttacher</h3>
+        <p>
+          Se ha trabajado en la implementación de un plugin compatible con Gazebo Harmonic para simular el agarre de objetos. 
+          Este plugin crea uniones de tipo DetachableJoint entre el efector final del robot y el objeto, 
+          replicando el comportamiento del plugin de Gazebo Classic. 
+          Durante el desarrollo se han identificado y solucionado varios problemas, especialmente relacionados con la operación de detach, 
+          que requería eliminar correctamente la entidad del joint dentro del Entity Component Manager para liberar el objeto.
+        </p>
+
+        <h3>- Integración con ROS 2 y gestión de dependencias</h3>
+        <p>
+          Se ha configurado la comunicación mediante servicios ROS 2 (AttachLink y DetachLink), 
+          utilizando el paquete linkattacher_msgs. 
+          Además, se han resuelto problemas de compilación relacionados con dependencias no incluidas en el workspace, 
+          asegurando que todos los paquetes necesarios estuvieran disponibles y correctamente enlazados durante el proceso de build con colcon.
+        </p>
+
+        <h3>- Análisis de diferencias entre Gazebo Classic y Harmonic</h3>
+        <p>
+          Finalmente, se ha realizado un análisis comparativo entre ambos entornos de simulación. 
+          En Gazebo Classic, el agarre se implementa mediante joints creados directamente en el motor físico, 
+          mientras que en Gazebo Harmonic es necesario gestionar explícitamente los componentes del ECS. 
+          Esto implica un mayor control sobre la creación y eliminación de uniones, pero también una mayor complejidad en la implementación.
+        </p>
+
+      <a class="back" href="semana_3.html">← Volver a Semana 3</a>
+
+      <h3>- solución</h3>
+        <textarea>
+            import HAL_Harmonic as HAL
+            import Frequency
+
+            # Enter sequential code!
+
+            ############################ TARGET DATA #####################################
+            # Data targets for MoveAbsJ (angular position for each joint, in deg)
+            absj_home = [0, -90, 70, -70, -90, 0]
+
+            # Absolute poses XYZ for aprox points to each object
+            aprox_yellow_box = [0.6, 0.3, 0.4] 
+            aprox_blue_sphere = [0.7, 0.1, 0.4]
+            aprox_green_cylinder = [0.5, -0.1, 0.5]
+            aprox_red_box = [0.6, -0.3, 0.4]
+
+            aprox_yellow_target = [-0.4, -0.45, 0.4]
+            aprox_blue_target = [-0.4, 0.45, 0.4]
+            aprox_green_target = [-0.4, -0.15, 0.4]
+            aprox_red_target = [-0.4, 0.15, 0.4]
+
+            # Auxiliary points
+            transition_point = [0.5, 0.0, 0.5]
+            transition_point_2 = [-0.5, 0.0, 0.4]
+            transition_point_3 = [0.0, -0.5, 0.4]
+            transition_point_4 = [0.0, 0.5, 0.4]
+
+            # Cartesian increments for relative MoveRelLinear, [Ax,Ay,Az] in meters)
+            decrease_z_10 = [0, 0, -0.10]
+            decrease_z_15 = [0, 0, -0.15]
+            increase_z_20 = [0, 0, 0.20]
+            increase_z_25 = [0, 0, 0.25]
+
+            ######################### PICK AND PLACE YELLOW BOX #########################
+            # Move Home with MoveAbsJ at full speed, no delay
+            HAL.MoveAbsJ(absj_home, 1, 0)
+
+            # PICK YELLOW BOX
+            HAL.MoveJoint(aprox_yellow_box, [180, 0, -90], 1, 0)  # Aprox point, full speed
+            HAL.MoveRelLinear(decrease_z_10, 0.5, 0)  # Pick point, half speed
+            HAL.GripperSet(45, 0.5)  # Close gripper to 55%
+            HAL.attach("yellow_box")
+            HAL.MoveRelLinear(increase_z_20, 0.5, 0)  # Aprox point, half speed
+
+            # PLACE YELLOW BOX
+            HAL.MoveJoint(transition_point, [180, 0, -90], 1, 0)  # Intermediate point, full sp
+            HAL.MoveJoint(transition_point_3, [180, 0, -90], 1, 0)  # Intermediate point, full sp
+            HAL.MoveJoint(aprox_yellow_target, [180, 0, -90], 1, 0)  # Aprox point to target
+            HAL.MoveRelLinear(decrease_z_15, 0.5, 0)  # Place point (linear)
+            HAL.GripperSet(100, 0.5)  # Open gripper (full).
+            HAL.MoveRelLinear(increase_z_20, 1, 0.2)  # Back to aprox point
+
+            ######################### PICK AND PLACE BLUE SPHERE #########################
+            # Move Home with MoveAbsJ at full speed, no delay
+            HAL.MoveAbsJ(absj_home, 1, 0)
+
+            # PICK BLUE SPHERE
+            HAL.MoveJoint(aprox_blue_sphere, [180, 0, -90], 1, 0)  # Aprox point, full speed
+            HAL.MoveRelLinear(decrease_z_10, 0.5, 2)  # Pick point, half speed
+            HAL.GripperSet(75, 0.5)  # Close gripper to 25%
+            HAL.attach("blue_ball")
+            HAL.MoveRelLinear(increase_z_20, 0.5, 0)  # Aprox point, half speed
+
+            # PLACE BLUE SPHERE
+            HAL.MoveJoint(transition_point, [180, 0, -90], 1, 0)  # Intermediate point, full sp
+            HAL.MoveJoint(aprox_blue_target, [180, 0, -90], 1, 0)  # Aprox point to target
+            HAL.MoveRelLinear(decrease_z_15, 0.5, 0)  # Place point (linear)
+            HAL.GripperSet(100, 0.5)  # Open gripper (full).
+            HAL.MoveRelLinear(increase_z_20, 1, 0.2)  # Back to aprox point
+
+            ######################### PICK AND PLACE GREEN CYLINDER ########################
+            # Move Home with MoveAbsJ at full speed, no delay
+            HAL.MoveAbsJ(absj_home, 1, 0)
+
+            # PICK GREEN CYLINDER
+            HAL.MoveJoint(aprox_green_cylinder, [180, 0, -90], 1, 0)  # Aprox point, full speed
+            HAL.MoveRelReor([0, 0, 90], 1, 0)  # Relative tool reorientation
+            HAL.MoveRelLinear(decrease_z_15, 0.5, 0)  # Pick point, half speed
+            HAL.GripperSet(60, 0.5)  # Close gripper to 40%
+            HAL.attach("green_cylinder")
+            HAL.MoveRelLinear(increase_z_20, 0.5, 0)  # Aprox point, half speed
+
+            # PLACE GREEN CYLINDER
+            HAL.MoveJoint(transition_point_3, [180, 0, 0], 1, 0)  # Intermediate point, full sp
+            HAL.MoveJoint(aprox_green_target, [180, 0, 0], 1, 0)  # Aprox point to target
+            HAL.MoveRelReor([0, 0, -90], 1, 0)  # Relative tool reorientation
+            HAL.MoveRelLinear(decrease_z_15, 0.5, 0)  # Place point (linear)
+            HAL.GripperSet(100, 0.5)  # Open gripper (full).
+            HAL.MoveRelLinear(increase_z_20, 1, 0.2)  # Back to aprox point
+
+            ######################### PICK AND PLACE RED BOX #########################
+            # Move Home with MoveAbsJ at full speed, no delay
+            HAL.MoveAbsJ(absj_home, 1, 0)
+
+            # PICK RED BOX
+            HAL.MoveJoint(aprox_red_box, [180, 0, -90], 1, 0)  # Aprox point, full speed
+            HAL.MoveRelReor([0, 0, 90], 1, 0)  # Relative tool reorientation
+            HAL.MoveRelLinear(decrease_z_10, 0.5, 0)  # Pick point, half speed
+            HAL.GripperSet(50, 0.5)  # Close gripper to 50%
+            HAL.attach("red_box")
+            HAL.MoveRelLinear(increase_z_20, 0.5, 0)  # Aprox point, half speed
+
+            # PLACE RED BOX
+            HAL.MoveJoint(transition_point, [180, 0, -90], 1, 0)  # Intermediate point, full sp
+            HAL.MoveJoint(transition_point_4, [180, 0, -90], 1, 0)  # Intermediate point, full sp
+            HAL.MoveJoint(aprox_red_target, [180, 0, -90], 1, 0)  # Aprox point to target
+            HAL.MoveRelLinear(decrease_z_15, 0.5, 0)  # Place point (linear)
+            HAL.GripperSet(100, 0.5)  # Open gripper (full).
+            HAL.MoveRelLinear(increase_z_20, 1, 0.2)  # Back to aprox point
+
+            ############################ SET HOME POSITION ###############################
+            HAL.MoveAbsJ(absj_home, 1, 0)
+
+            while True:
+                Frequency.tick()
+                # Enter iterative code!
+        </textarea>
+
+    </article>
+  </main>
+
+  <!-- Fecha automática -->
+  <script>
+    const dateElement = document.querySelector('.auto-date');
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    dateElement.textContent = formattedDate;
+  </script>
+
+</body>
+</html>
